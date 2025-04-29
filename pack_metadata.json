@@ -1,0 +1,26 @@
+{
+    "name": "SOC Proofpoint TAP",
+    "description": "This contains the content for XSIAM Proofpoint TAP.  This includes layouts, playbooks and incident fields",
+    "support": "community",
+    "currentVersion": "1.0.0",
+    "author": "Scott Brumley & Nicholas Ericksen",
+    "url": "https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions",
+    "email": "",
+    "categories": [
+        "Email"
+    ],
+    "tags": [
+        "SOC_Framework",
+        "Utility"
+    ],
+    "useCases": [],
+    "keywords": [],
+    "marketplaces": [
+        "xsoar",
+        "marketplacev2"
+    ],
+    "githubUser": [
+        "scottbrumley",
+        "nericksen"
+    ]
+}
