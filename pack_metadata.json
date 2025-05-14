@@ -1,26 +1,28 @@
 {
-    "name": "SOC Proofpoint TAP",
-    "description": "This contains the content for XSIAM Proofpoint TAP.  This includes layouts, playbooks and incident fields",
+    "name": "SOC ProofPoint TAP",
+    "description": "This content adds the proper content to make the soc-phishing-investigation-response work with proofpoint.",
     "support": "community",
     "currentVersion": "1.0.0",
-    "author": "Scott Brumley & Nicholas Ericksen",
+    "author": "Scott Brumley",
     "url": "https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions",
     "email": "",
     "categories": [
-        "Email"
+        "Forensics & Malware Analysis"
     ],
     "tags": [
-        "SOC_Framework",
-        "Utility"
+        "SOC",
+        "PoV",
+        "Phishing"
     ],
     "useCases": [],
     "keywords": [],
     "marketplaces": [
-        "xsoar",
         "marketplacev2"
     ],
+    "devEmail": [
+        "sbrumley@paloaltonetworks.com"
+    ],
     "githubUser": [
-        "scottbrumley",
-        "nericksen"
+        "annabarone"
     ]
 }
