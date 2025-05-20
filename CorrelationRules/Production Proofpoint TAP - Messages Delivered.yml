@@ -3,6 +3,8 @@ alert_category: User Defined
 alert_description: $alert_description
 alert_domain: DOMAIN_SECURITY
 alert_fields:
+  actor_effective_username: recipient
+  fw_email_recipient: recipient
   proofpointtapcampaignid: campaignId
   proofpointtapclassification: classification
   proofpointtapclickip: clickIP
