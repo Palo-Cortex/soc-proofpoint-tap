@@ -1,0 +1,73 @@
+action: ALERTS
+alert_category: User Defined
+alert_description: $alert_description
+alert_domain: DOMAIN_SECURITY
+alert_fields:
+  action_file_md5: md5
+  action_file_sha256: sha256
+  actor_effective_username: user_name
+  fw_email_recipient: recipient
+  proofpointtapcampaignid: campaignId
+  proofpointtapclassification: classification
+  proofpointtapclickip: clickIP
+  proofpointtapclicktime: clickTime
+  proofpointtapguid: GUID
+  proofpointtapheadersfrom: headerFrom
+  proofpointtapheadersreplyto: headerReplyTo
+  proofpointtapid: id
+  proofpointtapimposterscore: impostorScore
+  proofpointtapmalwarescore: malwareScore
+  proofpointtapmessageid: messageID
+  proofpointtapmessageparts: messageParts
+  proofpointtapmessagesize: messageSize
+  proofpointtapphishingscore: phishScore
+  proofpointtapreplytoaddress: replyToAddress
+  proofpointtapsenderip: senderIP
+  proofpointtapsmtpsender: sender
+  proofpointtapspamscore: spamScore
+  proofpointtapsubject: subject
+  proofpointtapsuspiciousurl: threatURL
+  proofpointtapthreatid: threatID
+  proofpointtapthreatinfomap: threatsInfoMap
+  proofpointtapthreatstatus: threatStatus
+  proofpointtapthreattime: threatTime
+  proofpointtapthreaturl: threatURL
+  proofpointtaptype: type
+  proofpointtapxmailer: xmailer
+alert_name: $alert_name
+alert_type: null
+crontab: '*/10 * * * *'
+dataset: alerts
+description: Messages Delivered
+drilldown_query_timeframe: ALERT
+execution_mode: SCHEDULED
+global_rule_id: Production Proofpoint TAP + CrowdStrike - Messages Delivered
+investigation_query_link: ''
+is_enabled: true
+lookup_mapping: []
+mapping_strategy: CUSTOM
+mitre_defs:
+  TA0001 - Initial Access: []
+name: Production Proofpoint TAP + CrowdStrike - Messages Delivered
+rule_id: 15
+search_window: 1 hours
+severity: User Defined
+simple_schedule: 10 minutes
+suppression_duration: 1 hours
+suppression_enabled: true
+suppression_fields:
+- fromAddress
+- headerFrom
+- toAddresses
+- sender
+- ccAddresses
+timezone: America/New_York
+user_defined_category: alert_category
+user_defined_severity: alert_severity
+xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter type = \"messages\
+  \ delivered\"\n| join type = left (dataset = crowdstrikefalcon_xsiam_generic_alert_raw\
+  \ \n| filter product = \"epp\"\n| fields user_name, user_principal, sha256, md5\
+  \ \n) as vt (toAddresses contains vt.user_principal)\n| alter alert_severity = _alert_data\
+  \ -> severity,\n        alert_category = _alert_data -> alert_category,\n      \
+  \  alert_name = _alert_data -> alert_name,\n        alert_description =  _alert_data\
+  \ -> alert_description,\n        threatID = threatsInfoMap -> [0].threatID"
