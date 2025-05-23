@@ -64,10 +64,11 @@ suppression_fields:
 timezone: America/New_York
 user_defined_category: alert_category
 user_defined_severity: alert_severity
-xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter type = \"clicks\
-  \ permitted\"\n| join type = left (dataset = crowdstrikefalcon_xsiam_generic_alert_raw\
-  \ \n| filter product = \"epp\"\n| fields user_name, user_principal, sha256, md5\
-  \ \n) as vt (toAddresses contains vt.user_principal)\n| alter alert_severity = _alert_data\
-  \ -> severity,\n        alert_category = _alert_data -> alert_category,\n      \
-  \  alert_name = _alert_data -> alert_name,\n        alert_description =  _alert_data\
-  \ -> alert_description,\n        threatID = threatsInfoMap -> [0].threatID"
+xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter lowercase(type)\
+  \ = \"clicks permitted\"\n| alter recipient = to_string(toAddresses)\n| alter alert_severity\
+  \ = coalesce(_alert_data -> severity),\n        alert_category = coalesce(_alert_data\
+  \ -> alert_category),\n        alert_name = coalesce(_alert_data -> alert_name),\n\
+  \        alert_description =  coalesce(_alert_data -> alert_description),\n    \
+  \    threatID = coalesce(threatsInfoMap -> [0].threatID)\n| join type = left (dataset\
+  \ = crowdstrikefalcon_xsiam_generic_alert_raw \n| filter product = \"epp\"\n| fields\
+  \ user_name, user_principal, sha256, md5 \n) as vt (recipient  contains vt.user_principal)\n"
