@@ -48,8 +48,9 @@ In **Settings > Layouts > Layout Rules**, create the following two layout rules:
 #### 🔗 Rule: Proofpoint - Click Permitted
 
 - **Condition:**
+  ```text
+  tags = Proofpoint, DS:Proofpoint TAP v2 AND alert type = Proofpoint TAP - Click Permitted
 
-alert type = Proofpoint TAP - Click Permitted AND original tags = DS:Proofpoint TAP v2
 - **Layout:** `Proofpoint - Click Permitted`
 
 > Example layout rules shown below:  
