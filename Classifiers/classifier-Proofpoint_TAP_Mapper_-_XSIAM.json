@@ -14,7 +14,7 @@
 	"itemVersion": "1.2.11",
 	"keyTypeMap": {},
 	"locked": false,
-	"logicalVersion": 16,
+	"logicalVersion": 19,
 	"mapping": {
 		"Phishing Alerts": {
 			"dontMapEventToLabels": false,
@@ -531,11 +531,62 @@
 						]
 					}
 				},
+				"Proofpoint TAP Header To": {
+					"complex": {
+						"filters": [],
+						"root": "toAddresses",
+						"transformers": [
+							{
+								"args": {
+									"separator": {
+										"isContext": false,
+										"value": {
+											"simple": ","
+										}
+									}
+								},
+								"operator": "join"
+							}
+						]
+					}
+				},
 				"Proofpoint TAP Headers From": {
-					"simple": "headerFrom"
+					"complex": {
+						"filters": [],
+						"root": "headerFrom",
+						"transformers": [
+							{
+								"args": {
+									"separator": {
+										"isContext": false,
+										"value": {
+											"simple": ","
+										}
+									}
+								},
+								"operator": "join"
+							}
+						]
+					}
 				},
 				"Proofpoint TAP Headers Reply To": {
-					"simple": "replyToAddress"
+					"complex": {
+						"filters": [],
+						"root": "replyToAddress",
+						"transformers": [
+							{
+								"args": {
+									"separator": {
+										"isContext": false,
+										"value": {
+											"simple": ","
+										}
+									}
+								},
+								"operator": "join"
+							}
+						]
+					}
 				},
 				"Proofpoint TAP ID": {
 					"simple": "id"
