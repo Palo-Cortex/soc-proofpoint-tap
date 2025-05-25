@@ -53,7 +53,7 @@ In **Settings > Layouts > Layout Rules**, create the following two layout rules:
 - **Layout:** `Proofpoint - Click Permitted`
 
 > Example layout rules shown below:  
-> ![Layout Rules Screenshot](./2ef0cdf7-c6d5-4169-86a8-9e1057aeb653.png)
+> ![Layout Rules Screenshot](https://github.com/Palo-Cortex/soc-proofpoint-tap/blob/main/images/layout-rule.jpg)
 
 ---
 
