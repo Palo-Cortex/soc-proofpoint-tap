@@ -5,8 +5,18 @@ alert_domain: DOMAIN_SECURITY
 alert_fields:
   action_file_md5: md5
   action_file_sha256: sha256
+  action_local_ip: local_ip
+  action_remote_ip: dest_ip
   actor_effective_username: user_name
+  agent_device_domain: domain
+  agent_hostname: hostname
+  agent_id: cid
+  agent_os_sub_type: agent_os_type
+  deviceexternalips: external_ip
+  devicemacaddress: mac_address
   fw_email_recipient: recipient
+  postnatsourceip: external_ip
+  prenatsourceip: local_ip
   proofpointtapcampaignid: campaignId
   proofpointtapclassification: classification
   proofpointtapclickip: clickIP
@@ -69,6 +79,18 @@ xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter type = \"mes
   \ = coalesce(_alert_data -> severity),\n        alert_category = coalesce(_alert_data\
   \ -> alert_category),\n        alert_name = coalesce(_alert_data -> alert_name),\n\
   \        alert_description =  coalesce(_alert_data -> alert_description),\n    \
-  \    threatID = coalesce(threatsInfoMap -> [0].threatID)\n| join type = left (dataset\
-  \ = crowdstrikefalcon_xsiam_generic_alert_raw \n| filter product = \"epp\"\n| fields\
-  \ user_name, user_principal, sha256, md5 \n) as vt (recipient  contains vt.user_principal)\n"
+  \    threatID = coalesce(threatsInfoMap -> [0].threatID),\n        account_name\
+  \ = _alert_data -> accountname,\n        deviceexternalip = _alert_data -> deviceexternalip,\n\
+  \        pp_sha256 = _alert_data -> actor_process_image_sha256[0],\n        pp_local_ip\
+  \ = _alert_data -> action_local_ip[0],\n        pp_agent_os = _alert_data -> agent_os_type,\n\
+  \        pp_dest_ip = _alert_data -> destinationips[0]\n| join type = left (dataset\
+  \ = crowdstrikefalcon_xsiam_generic_alert_raw \n| filter product = \"epp\"\n| alter\
+  \       \n        hostname = device->hostname,\n        domain = device->machine_domain,\n\
+  \        local_ip = device->local_ip,\n        external_ip = device->external_ip,\n\
+  \        mac_address = device->mac_address,\n        agent_os_type = device -> os_version\n\
+  | fields user_name, user_principal, sha256, md5, cid, hostname, local_ip, mac_address,\
+  \ external_ip, domain, agent_os_type \n) as vt (recipient  contains vt.user_principal)\n\
+  | alter user_name = coalesce(user_name,account_name)\n| alter external_ip = coalesce(external_ip,\
+  \ deviceexternalip)\n| alter sha256 = coalesce(sha256, pp_sha256)\n| alter local_ip\
+  \ = coalesce(local_ip, pp_local_ip)\n| alter agent_os_type = coalesce(agent_os_type,\
+  \ pp_agent_os)\n| alter dest_ip = pp_dest_ip"
