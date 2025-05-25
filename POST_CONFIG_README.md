@@ -49,7 +49,7 @@ In **Settings > Layouts > Layout Rules**, create the following two layout rules:
 
 - **Condition:**
 
-
+alert type = Proofpoint TAP - Click Permitted AND original tags = DS:Proofpoint TAP v2
 - **Layout:** `Proofpoint - Click Permitted`
 
 > Example layout rules shown below:  
@@ -66,3 +66,4 @@ To apply the Data Model Rules:
 1. Navigate to **Settings → Data Management → Data Model Rules**
 2. Copy and paste the rule content from the following file in this repository:
 
+AssetsModelingRules/proofpoint_tap_rule
