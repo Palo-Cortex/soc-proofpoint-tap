@@ -11,7 +11,6 @@ alert_fields:
   agent_device_domain: domain
   agent_hostname: hostname
   agent_id: cid
-  agent_os_sub_type: agent_os_type
   deviceexternalips: external_ip
   devicemacaddress: mac_address
   fw_email_recipient: recipient
@@ -87,10 +86,9 @@ xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter lowercase(ty
   \ = crowdstrikefalcon_xsiam_generic_alert_raw \n| filter product = \"epp\"\n| alter\
   \       \n        hostname = device->hostname,\n        domain = device->machine_domain,\n\
   \        local_ip = device->local_ip,\n        external_ip = device->external_ip,\n\
-  \        mac_address = device->mac_address,\n        agent_os_type = device -> os_version\n\
-  | fields user_name, user_principal, sha256, md5, cid, hostname, local_ip, mac_address,\
-  \ external_ip, domain, agent_os_type \n) as vt (recipient  contains vt.user_principal)\n\
-  | alter user_name = coalesce(user_name,account_name)\n| alter external_ip = coalesce(external_ip,\
-  \ deviceexternalip)\n| alter sha256 = coalesce(sha256, pp_sha256)\n| alter local_ip\
-  \ = coalesce(local_ip, pp_local_ip)\n| alter agent_os_type = coalesce(agent_os_type,\
-  \ pp_agent_os)\n| alter dest_ip = pp_dest_ip"
+  \        mac_address = device->mac_address\n| fields user_name, user_principal,\
+  \ sha256, md5, cid, hostname, local_ip, mac_address, external_ip, domain \n) as\
+  \ vt (recipient  contains vt.user_principal)\n| alter user_name = coalesce(user_name,account_name)\n\
+  | alter external_ip = coalesce(external_ip, deviceexternalip)\n| alter sha256 =\
+  \ coalesce(sha256, pp_sha256)\n| alter local_ip = coalesce(local_ip, pp_local_ip)\n\
+  | alter dest_ip = pp_dest_ip"
