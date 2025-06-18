@@ -58,7 +58,7 @@ mapping_strategy: CUSTOM
 mitre_defs:
   TA0001 - Initial Access: []
 name: Production Proofpoint TAP + CrowdStrike - Clicks Permitted
-rule_id: 65
+rule_id: 98
 search_window: 1 hours
 severity: User Defined
 simple_schedule: 10 minutes
@@ -70,11 +70,11 @@ suppression_fields:
 - toAddresses
 - sender
 - ccAddresses
-timezone: America/New_York
+timezone: America/Chicago
 user_defined_category: alert_category
 user_defined_severity: alert_severity
-xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter lowercase(type)\
-  \ = \"clicks permitted\"\n| alter recipient = to_string(toAddresses)\n| alter alert_severity\
+xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter type = \"clicks\
+  \ permitted\"\n| alter recipient = to_string(toAddresses)\n| alter alert_severity\
   \ = coalesce(_alert_data -> severity),\n        alert_category = coalesce(_alert_data\
   \ -> alert_category),\n        alert_name = coalesce(_alert_data -> alert_name),\n\
   \        alert_description =  coalesce(_alert_data -> alert_description),\n    \
@@ -88,7 +88,7 @@ xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter lowercase(ty
   \        local_ip = device->local_ip,\n        external_ip = device->external_ip,\n\
   \        mac_address = device->mac_address\n| fields user_name, user_principal,\
   \ sha256, md5, cid, hostname, local_ip, mac_address, external_ip, domain \n) as\
-  \ vt (recipient  contains vt.user_principal)\n| alter user_name = coalesce(user_name,account_name)\n\
-  | alter external_ip = coalesce(external_ip, deviceexternalip)\n| alter sha256 =\
-  \ coalesce(sha256, pp_sha256)\n| alter local_ip = coalesce(local_ip, pp_local_ip)\n\
-  | alter dest_ip = pp_dest_ip"
+  \ vt (account_name = vt.user_principal)\n| alter _time = messageTime \n| alter user_name\
+  \ = coalesce(user_name ,account_name)\n| alter external_ip = coalesce(external_ip,\
+  \ deviceexternalip)\n| alter sha256 = coalesce(sha256, pp_sha256)\n| alter local_ip\
+  \ = coalesce(local_ip, pp_local_ip)\n| alter dest_ip = pp_dest_ip"
