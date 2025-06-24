@@ -66,7 +66,7 @@ Before using this pack, ensure the following:
 ## 🛠️ How to Use
 
 1. Clone this repository to your local environment.
-2. Use the [Demisto “XSOAR” SDK](https://xsoar.pan.dev/docs/concepts/dev-setup) to upload the content into your Cortex XSIAM tenant.
+2. Use the [Demisto “XSOAR” SDK](https://github.com/demisto/demisto-sdk) to upload the content into your Cortex XSIAM tenant.
 3. Choose the correlation rule(s) most applicable to your environment:
    - **Proofpoint Only**: Detects threats based solely on TAP telemetry.
    - **Proofpoint + CrowdStrike**: Enriches TAP alerts with endpoint context for higher fidelity detection.
