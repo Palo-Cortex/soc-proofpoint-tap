@@ -1,5 +1,5 @@
 {
-    "name": "SOC ProofPoint TAP",
+    "name": "SOC Proofpoint TAP Integration Enhancement for Cortex XSIAM",
     "description": "This content adds the proper content to make the soc-phishing-investigation-response work with proofpoint.",
     "support": "community",
     "currentVersion": "1.0.1",
