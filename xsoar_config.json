@@ -6,6 +6,12 @@
             "system": "yes"
         }
     ],
+    "post_config_docs": [
+            {
+                "name": "SOC Proofpoint TAP - Manual Steps",
+                "url": "https://github.com/Palo-Cortex/soc-proofpoint-tap/blob/main/POST_CONFIG_README.md"
+            }
+    ],
     "marketplace_packs": [
         {
             "id": "ProofpointTAP",
@@ -29,7 +35,7 @@
             "isIntegrationScript": true,
             "mappingId": "Proofpoint TAP Classifier",
             "outgoingMapperId": "",
-            "incomingMapperId": "05e0aeaf-57ca-40f1-8090-1b01e0f80549",
+            "incomingMapperId": "",
             "canSample": true,
             "defaultIgnore": false,
             "integrationLogLevel": "",
@@ -91,7 +97,7 @@
                             "version": 0,
                             "workgroup": ""
                         },
-                        "identifier": "ac349faa-45e9-d6f3-01ed-3c4bd27aad51",
+                        "identifier": "default",
                         "passwordChanged": false
                     }
                 },
@@ -606,7 +612,7 @@
                             "version": 0,
                             "workgroup": ""
                         },
-                        "identifier": "ac349faa-45e9-d6f3-01ed-3c4bd27aad51",
+                        "identifier": "default",
                         "passwordChanged": false
                     }
                 },
