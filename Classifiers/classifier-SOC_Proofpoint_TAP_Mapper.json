@@ -5,16 +5,16 @@
 	"definitionId": "",
 	"description": "",
 	"feed": false,
-	"fromVersion": "6.0.0",
-	"id": "Proofpoint TAP Mapper - XSIAM",
+	"fromServerVersion": "6.0.0",
+	"id": "SOC Proofpoint TAP Mapper",
 	"incidentSamples": null,
 	"indicatorSamples": null,
 	"instanceIds": null,
 	"isOverridable": false,
-	"itemVersion": "1.2.11",
+	"itemVersion": "1.0.1",
 	"keyTypeMap": {},
 	"locked": false,
-	"logicalVersion": 19,
+	"logicalVersion": 24,
 	"mapping": {
 		"Phishing Alerts": {
 			"dontMapEventToLabels": false,
@@ -175,27 +175,90 @@
 		"Proofpoint TAP - Click Permitted": {
 			"dontMapEventToLabels": false,
 			"internalMapping": {
+				"Classification": {
+					"complex": {
+						"accessor": "[0].classification",
+						"filters": [],
+						"root": "threatsInfoMap",
+						"transformers": []
+					}
+				},
+				"File Name": {
+					"complex": {
+						"accessor": "[0].filename",
+						"filters": [],
+						"root": "messageParts",
+						"transformers": []
+					}
+				},
+				"Module": {
+					"complex": {
+						"accessor": "[0]",
+						"filters": [],
+						"root": "modulesRun",
+						"transformers": []
+					}
+				},
+				"Proofpoint TAP Campaign ID": {
+					"simple": "threatsInfoMap.campaignID"
+				},
 				"Proofpoint TAP Classification": {
-					"simple": "classification"
+					"simple": "threatsInfoMap.[0].classification"
 				},
 				"Proofpoint TAP Click IP": {
 					"simple": "clickIP"
 				},
 				"Proofpoint TAP Click Time": {
 					"complex": {
-						"filters": [],
+						"filters": null,
 						"root": "clickTime",
-						"transformers": []
+						"transformers": null
 					}
 				},
 				"Proofpoint TAP GUID": {
 					"simple": "GUID"
 				},
+				"Proofpoint TAP Header CC": {
+					"simple": "ccAddresses"
+				},
+				"Proofpoint TAP Header To": {
+					"simple": "toAddresses"
+				},
+				"Proofpoint TAP Headers From": {
+					"simple": "headerFrom"
+				},
+				"Proofpoint TAP Headers Reply To": {
+					"simple": "headerReplyTo"
+				},
 				"Proofpoint TAP ID": {
 					"simple": "id"
 				},
+				"Proofpoint TAP Imposter Score": {
+					"simple": "impostorScore"
+				},
+				"Proofpoint TAP Malware Score": {
+					"simple": "malwareScore"
+				},
 				"Proofpoint TAP Message ID": {
 					"simple": "messageID"
+				},
+				"Proofpoint TAP Message Parts": {
+					"simple": "messageParts"
+				},
+				"Proofpoint TAP Message Size": {
+					"simple": "messageSize"
+				},
+				"Proofpoint TAP Phishing Score": {
+					"simple": "phishScore"
+				},
+				"Proofpoint TAP Policies": {
+					"simple": "policyRoutes"
+				},
+				"Proofpoint TAP Quarantine Folder": {
+					"simple": "quarantineFolder"
+				},
+				"Proofpoint TAP Reply To Address": {
+					"simple": "replyToAddress"
 				},
 				"Proofpoint TAP SMTP Recipient": {
 					"simple": "recipient"
@@ -206,15 +269,21 @@
 				"Proofpoint TAP Sender IP": {
 					"simple": "senderIP"
 				},
+				"Proofpoint TAP Spam Score": {
+					"simple": "spamScore"
+				},
+				"Proofpoint TAP Subject": {
+					"simple": "subject"
+				},
 				"Proofpoint TAP Suspicious URL": {
 					"simple": "url"
 				},
 				"Proofpoint TAP Threat ID": {
-					"simple": "threatID"
+					"simple": "threatsInfoMap.[0].threatID"
 				},
 				"Proofpoint TAP Threat Info Map": {
 					"complex": {
-						"filters": [],
+						"filters": null,
 						"root": "threatsInfoMap",
 						"transformers": [
 							{
@@ -224,13 +293,13 @@
 					}
 				},
 				"Proofpoint TAP Threat Status": {
-					"simple": "threatStatus"
+					"simple": "threatsInfoMap.[0].threatStatus"
 				},
 				"Proofpoint TAP Threat Time": {
-					"simple": "threatTime"
+					"simple": "threatsInfoMap.[0].threatTime"
 				},
 				"Proofpoint TAP Threat URL": {
-					"simple": "threatURL"
+					"simple": "threatsInfoMap.[0].threatUrl"
 				},
 				"Proofpoint TAP Type": {
 					"simple": "type"
@@ -238,8 +307,19 @@
 				"Proofpoint TAP User Agent": {
 					"simple": "userAgent"
 				},
+				"Proofpoint TAP Xmailer": {
+					"simple": "xmailer"
+				},
 				"Remote IP": {
 					"simple": "clickIP"
+				},
+				"URL": {
+					"complex": {
+						"accessor": "[0].threatUrl",
+						"filters": [],
+						"root": "threatsInfoMap",
+						"transformers": []
+					}
 				}
 			}
 		},
@@ -475,6 +555,9 @@
 		"Proofpoint TAP - Message Delivered": {
 			"dontMapEventToLabels": false,
 			"internalMapping": {
+				"Classification": {
+					"simple": "threatsInfoMap.[0].classification"
+				},
 				"Email Sender": {
 					"simple": "sender"
 				},
@@ -782,6 +865,9 @@
 		"dbot_classification_incident_type_all": {
 			"dontMapEventToLabels": false,
 			"internalMapping": {
+				"Classification": {
+					"simple": "threatsInfoMap.[0].classification"
+				},
 				"Detection URL": {
 					"simple": "threatsInfoMap.[0].threat"
 				},
@@ -800,6 +886,9 @@
 				"Local IP": {
 					"simple": "senderIP"
 				},
+				"MITRE Tactic ID": {
+					"simple": "threatsInfoMap.[0].classification"
+				},
 				"Remote IP": {
 					"simple": "senderIP"
 				},
@@ -809,13 +898,13 @@
 			}
 		}
 	},
-	"name": "Proofpoint TAP Mapper - XSIAM",
-	"nameRaw": "Proofpoint TAP Mapper - XSIAM",
+	"name": "SOC Proofpoint TAP Mapper",
+	"nameRaw": "SOC Proofpoint TAP Mapper",
 	"packID": "",
-	"packName": "Proofpoint TAP",
+	"packName": "SOC ProofPoint TAP",
 	"sourceClassifierId": "Proofpoint TAP Mapper",
 	"system": false,
-	"toVersion": "",
+	"toServerVersion": "",
 	"transformer": {},
 	"type": "mapping-incoming",
 	"unclassifiedCases": null,
