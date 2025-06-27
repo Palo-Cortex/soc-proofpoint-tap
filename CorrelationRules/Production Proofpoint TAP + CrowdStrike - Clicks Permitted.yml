@@ -56,9 +56,10 @@ is_enabled: true
 lookup_mapping: []
 mapping_strategy: CUSTOM
 mitre_defs:
-  TA0001 - Initial Access: []
+  TA0001 - Initial Access:
+  - T1566 - Phishing
 name: Production Proofpoint TAP + CrowdStrike - Clicks Permitted
-rule_id: 98
+rule_id: 105
 search_window: 1 hours
 severity: User Defined
 simple_schedule: 10 minutes
