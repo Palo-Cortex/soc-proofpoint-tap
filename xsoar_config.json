@@ -114,8 +114,8 @@
                     "hiddenPassword": false,
                     "options": null,
                     "info": "",
-                    "hasvalue": true,
-                    "value": "Unclassified"
+                    "hasvalue": false,
+                    "value": null
                 },
                 {
                     "section": "Collect",
@@ -351,7 +351,7 @@
             "isIntegrationScript": true,
             "mappingId": "Proofpoint TAP Classifier",
             "outgoingMapperId": "",
-            "incomingMapperId": "05e0aeaf-57ca-40f1-8090-1b01e0f80549",
+            "incomingMapperId": "",
             "canSample": true,
             "defaultIgnore": false,
             "integrationLogLevel": "",

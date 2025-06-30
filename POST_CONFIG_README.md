@@ -26,16 +26,17 @@ This repository contains the **SOC-Proofpoint-TAP** content pack for Palo Alto N
 ## 🛠️ Additional Manual Steps Post-Installation
 
 
-### 1. Configure the Proofpoint TAP Integration Instance
+### 1. Configure the Proofpoint TAP Integration Instances
 1. Navigate to **Settings → Configurations → Data Collection → Automation & Feed Integration**
 2. Expand the Proofpoint TAP instance dropdown 
-3. Click on the gear next to the _Proofpoint TAP v2_instance_1_
-4. Update the integration instance’s configuration for the following form fields: 
+3. Click on the gear next to the _Proofpoint TAP v2_Clicks_Permitted_ and _Proofpoint TAP v2_Messages_Delivered_
+4. Update the integration instances' configurations for the following form fields: 
    1. Server URL
    2. Service Principal
    3. Password
    
-5. Test and save the integration instance configuration
+5. Test and save the integration instance configurations
+6. **Enable** the instances
 
 
 ### 2. Disable System Proofpoint Correlation Rules
