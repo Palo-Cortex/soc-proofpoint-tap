@@ -3,8 +3,21 @@ alert_category: User Defined
 alert_description: $alert_description
 alert_domain: DOMAIN_SECURITY
 alert_fields:
+  action_file_md5: proofpointmd5
+  action_file_name: proofpointfilename
+  action_file_sha256: proofpointsha256
+  action_remote_ip: senderIP
   actor_effective_username: recipient
+  agent_device_domain: domain
+  dns_query_name: dns_name
+  emailmessageid: messageID
+  emailsenderip: senderIP
+  emailsource: sender
+  filehash: proofpointsha256
   fw_email_recipient: recipient
+  fw_email_sender: sender
+  fw_email_subject: subject
+  fw_url_domain: url
   proofpointtapcampaignid: campaignId
   proofpointtapclassification: classification
   proofpointtapclickip: clickIP
@@ -36,7 +49,7 @@ alert_name: $alert_name
 alert_type: null
 crontab: null
 dataset: alerts
-description: Click Permitted
+description: Clicks Permitted
 drilldown_query_timeframe: ALERT
 execution_mode: REAL_TIME
 global_rule_id: Production Proofpoint TAP - Clicks Permitted
@@ -48,7 +61,7 @@ mitre_defs:
   TA0001 - Initial Access:
   - T1566 - Phishing
 name: Production Proofpoint TAP - Clicks Permitted
-rule_id: 112
+rule_id: 185
 search_window: null
 severity: User Defined
 simple_schedule: null
@@ -65,7 +78,14 @@ user_defined_category: alert_category
 user_defined_severity: alert_severity
 xql_query: "dataset = proofpoint_tap_v2_generic_alert_raw\n| filter type = \"clicks\
   \ permitted\"\n| alter source_alert_type = type\n| alter alert_severity = _alert_data\
-  \ -> severity,\n        alert_category = _alert_data -> alert_category,\n      \
-  \  alert_name = _alert_data -> alert_name,\n        alert_description =  _alert_data\
-  \ -> alert_description,\n        threatsInfoMap = _alert_data -> raw_json\n| alter\
-  \ threatID = threatsInfoMap -> threatID\n        "
+  \ -> severity,\n         alert_category = _alert_data -> alert_category,\n     \
+  \   alert_name = _alert_data -> alert_name,\n        alert_description =  _alert_data\
+  \ -> alert_description,\n        threatID = threatsInfoMap -> [0].threatID,\n  \
+  \      classification = threatsInfoMap -> [0].classification,\n        proofpointsha256\
+  \ = messageParts -> [0].sha256,\n        proofpointmd5 = messageParts -> [0].md5,\n\
+  \        proofpointfilename = messageParts -> [0].filename,\n        threatType\
+  \ = threatsInfoMap -> [0].threatType,\n        threat = threatsInfoMap -> [0].threat,\n\
+  \        threatURL = threatsInfoMap -> [0].threatUrl\n| alter domain = if(lowercase(threatType)\
+  \ in (\"url\"), coalesce(extract_url_registered_domain(threat), extract_url_registered_domain(sender)),\
+  \ \"\")\n| alter dns_name = if(lowercase(threatType) in (\"url\"), extract_url_registered_domain(threat),\
+  \ \"\")"
